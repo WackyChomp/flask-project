@@ -54,8 +54,19 @@ def submit():
         score = request.form['score']
         adjective = request.form['adjective']
                 #print(first_name, last_name, score, adjective)
-        return render_template('processed.html')
 
+        # Message that prompts user to fill form
+        if first_name == '' or last_name == '':
+            return render_template('index.html', message="Please enter the minimum fields for processing")
+
+        # Prevents duplicate first_name
+        if db.session.query(info_storage).filter(info_storage.first_name == first_name).count() == 0:
+            data = info_storage(first_name, last_name, score, adjective)
+            db.session.add(data)
+            db.session.commit()
+            return render_template('processed.html')
+
+        return render_template('index.html', message="Unfortunately the first name has already been taken, enter another")
 
 #------------------------------------------------------------#
 
