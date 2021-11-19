@@ -12,7 +12,7 @@ ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True             # Server reloads after each save/change
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:****pw goes here****@localhost/mlh-app'        # Development Database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:****pw goes here****@localhost/mlh-app'        # For local development database
 else:
     app.debug = False
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
