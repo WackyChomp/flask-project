@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+#from email import send_email
 
 app = Flask(__name__)
 
@@ -64,6 +65,7 @@ def submit():
             data = info_storage(first_name, last_name, score, adjective)
             db.session.add(data)
             db.session.commit()
+#            send_email(first_name, last_name, score, adjective)
             return render_template('processed.html')
 
         return render_template('index.html', message="Unfortunately the first name has already been taken, enter another")
